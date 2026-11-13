@@ -75,7 +75,7 @@ The game server sends every transaction and pays the fees. The economy contract 
 | `POST /api/revive`   | Signed, with the gem count the page saw, so a copied request stops working after one purchase. Calls `buy_gem`; the page then tells the game to continue the run                                                                                                                                                                                                                                         |
 | `POST /api/settle`   | Pays out the round if it has ended. Each open page calls it at a random moment in the 10 seconds after the countdown ends, so winnings show without waiting for someone's next run                                                                                                                                                                                                                       |
 
-When a run ends, the game sends `pc:gameover` with an `id`, the floor, gems and duration ([pixel-climb#1](https://github.com/hsjtechnologies/pixel-climb/pull/1)), plus the player's saved gems and what a gem revive costs (50, [pixel-climb#3](https://github.com/hsjtechnologies/pixel-climb/pull/3)). The page saves the run and offers **Revive for N $PCMB**, **Revive for 50 gems** or **End run**, then replies `pc:revive`, `pc:revive-gems` or `pc:end` with the same `id`. A gem revive is paid from the gems saved in the game, so it never reaches the server; the "revives" count in the top bar is the $PCMB ones.
+When a run ends, the game sends `pc:gameover` with an `id`, the floor, gems and duration (game PR #1), plus the player's saved gems and what a gem revive costs (50, game PR #3). The page saves the run and offers **Revive for N $PCMB**, **Revive for 50 gems** or **End run**, then replies `pc:revive`, `pc:revive-gems` or `pc:end` with the same `id`. A gem revive is paid from the gems saved in the game, so it never reaches the server; the "revives" count in the top bar is the $PCMB ones.
 
 Known limits:
 
@@ -102,7 +102,7 @@ The site picks its network with the `NEAR_NETWORK` environment variable (`testne
 
 ### Rebuilding the game
 
-`static/game/` is built from the Solar2D project at [hsjtechnologies/pixel-climb](https://github.com/hsjtechnologies/pixel-climb) with:
+`static/game/` is built from the Solar2D project in the game repo, `hsjtechnologies/pixel-climb`, which is private, with:
 
 ```sh
 scripts/game-web/build.sh /path/to/pixel-climb
@@ -182,7 +182,7 @@ Checks: `pnpm check` (types), `pnpm lint` and `pnpm test` (request signing, the 
 - Submission: tag `hackathon-submission`, added on the final commit.
 - Everything built in the hackathon: [`pre-hackathon...main`](../../compare/pre-hackathon...main).
 
-**Pre-existing work:** the Pixel Climb game itself (the Solar2D build in `static/game/`) existed before 1 Nov 2026. It is committed here as compiled output only. What was built during the hackathon is this web app (the play page, the wallet integration and the economy endpoints), the contracts in `contracts/`, the web build script in `scripts/game-web/`, and the game's web bridge and HTML5 changes in the pixel-climb repo ([pixel-climb#1](https://github.com/hsjtechnologies/pixel-climb/pull/1) and later).
+**Pre-existing work:** the Pixel Climb game itself (the Solar2D build in `static/game/`) existed before 1 Nov 2026. It is committed here as compiled output only. What was built during the hackathon is this web app (the play page, the wallet integration and the economy endpoints), the contracts in `contracts/`, the web build script in `scripts/game-web/`, and the game's web changes in the private game repo: the bridge to this page (game PR #1), revives with saved gems (#3) and the How to play screen (#4). Their result is the compiled build in `static/game/`.
 
 ## Credits
 
